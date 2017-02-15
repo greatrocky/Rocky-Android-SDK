@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.luoji.pay">
+
+    <application android:allowBackup="true" android:label="@string/app_name"
+        android:supportsRtl="true">
+        <meta-data
+            android:name="QBSDKAppKey"
+            android:value="jrR2yW0hXw7/J9hTiw7byoE8" />
+        <activity android:name="com.luoji.pay.LjMainActivity"></activity>
+    </application>
+
+</manifest>
