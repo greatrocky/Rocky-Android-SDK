@@ -24,11 +24,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luoji.pay.BaseEvent;
@@ -49,50 +52,40 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-    private static final int REQUEST_READ_CONTACTS = 0;
-
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    private ImageView img1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // 设置全屏
         setContentView(R.layout.activity_login);
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
-//        if (!EventBus.getDefault().hasSubscriberForEvent(HashMap.class)) {
         EventBus.getDefault().register(this);
-//        }
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        img1 = (ImageView) findViewById(R.id.img1);
+
+        img1.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-//                attemptLogin();
+            public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, LjMainActivity.class);
                 intent.putExtra("appid", "a1234");
                 intent.putExtra("appkey", "1234567890");
                 intent.putExtra("userid", "u5678");
                 LoginActivity.this.startActivity(intent);
-
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+
     }
 
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onEventMainThread(BaseEvent event) {
         Log.e("event", event.msg);
-
+        if (event.status == 1) {
+            img1.setImageDrawable(getResources().getDrawable(R.mipmap.bg2));
+        }
     }
 
     //用户需要写这句话////
