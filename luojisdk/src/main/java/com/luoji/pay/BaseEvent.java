@@ -18,9 +18,8 @@ public class BaseEvent {
 
     public int status;
 
-    public BaseEvent(String s) {
-        this.msg=s;
+    public BaseEvent(int s) {
+        this.status=s;
     }
-
 
 }

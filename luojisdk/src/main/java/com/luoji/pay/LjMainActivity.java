@@ -44,13 +44,9 @@ public class LjMainActivity extends AppCompatActivity {
         String userid = intent.getStringExtra("userid");
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         String date = sDateFormat.format(new java.util.Date());
-//        String date="123";
         String turl = "appid=" + appid + "&ts=" + date + "&userid=" + userid + appkey;
         String md5 = MD5.stringToMD5(turl);
         url = host + "userid=" + userid + "&appid=" + appid + "&ts=" + date + "&sign=" + md5;
-//        Log.e("url=", "" + turl);
-//        Log.e("md5=", md5);
-//        Log.e("hosturl=", url);
         //全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
@@ -90,7 +86,7 @@ public class LjMainActivity extends AppCompatActivity {
                 try {
                     JSONObject js = new JSONObject(s).getJSONObject("data");
                     int status=js.getInt("status");
-                    EventBus.getDefault().post(new BaseEvent(js.toString()));
+                    EventBus.getDefault().post(new BaseEvent(status));
                     if(status==1){
                         LjMainActivity.this.finish();
                     }
