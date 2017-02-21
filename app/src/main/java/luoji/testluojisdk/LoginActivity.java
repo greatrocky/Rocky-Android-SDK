@@ -82,9 +82,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(BaseEvent event) {
-//        Log.e("event", event.msg);
         if (event.status == 1) {
-            img1.setImageDrawable(getResources().getDrawable(R.mipmap.bg2));
+            img1.setBackgroundResource(R.mipmap.bg2);
         }
     }
 
